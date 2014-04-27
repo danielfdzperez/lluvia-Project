@@ -31,9 +31,122 @@ var policia = w.new_boid({
 	 policia.brain.activate('seek')
 	 policia.brain.get_behavior('seek').set_target(caco1)
 
+
+var usr = w.new_boid( { colour: "black",
+                 geo_data:  {
+                               position: new Vector(300, 180),
+                               velocity: new Vector(0, 0),
+                               acceleration: new Vector(0, 0)
+                            }
+   })
+
+
+var zombie = w.new_boid({
+         colour: "green",
+	})
+         zombie.vel_max = 20
+	 zombie.brain.activate('seek')
+	 zombie.brain.get_behavior('seek').set_target(usr)
+
+
+/*document.onkeydown=function(e){ 
+    switch(e.keyCode) {
+	case 37:
+	    usr.geo_data.velocity = new Vector(-30, 0)
+	    // left key pressed
+	    break;
+	case 38:
+	    usr.geo_data.velocity = new Vector(0, -30)
+	    // up key pressed
+	    break;
+	case 39:
+	    usr.geo_data.velocity = new Vector(30, 0)
+	    // right key pressed
+	    break;
+	case 40:
+	    usr.geo_data.velocity = new Vector(0, 30)
+	    // down key pressed
+	    break; 
+    }  
+}
+
+
+
+document.onkeyup=function(e) {
+    switch(e.keyCode) {
+	case 37:
+	    usr.geo_data.velocity = new Vector(0, 0)
+	    // left key pressed
+	    break;
+	case 38:
+	    usr.geo_data.velocity = new Vector(0, 0)
+	    // up key pressed
+	    break;
+	    case 39:
+	    usr.geo_data.velocity = new Vector(0, 0)
+	    // right key pressed
+	    break;
+	case 40:
+	    usr.geo_data.velocity = new Vector(0, 0)
+	    // down key pressed
+	    break; 
+    }  
+}*/
+
+
+	 var keysDown = {};
+
+addEventListener("keydown", function (e) {
+	keysDown[e.keyCode] = true;
+	    }, false);
+
+addEventListener("keyup", function (e) {
+	keysDown[e.keyCode] = false;
+	    //delete keysDown[e.keyCode];
+	    }, false);
+
+
+
+var x= usr.geo_data.velocity.get_coord(0);
+var y= usr.geo_data.velocity.get_coord(1);
+
 	 function persecucion(){
-	     var policia_caco1 = (caco1.geo_data.position.get_coord(0) - policia.geo_data.position.get_coord(0))
-	     var policia_caco2 = (caco2.geo_data.position.get_coord(1) - policia.geo_data.position.get_coord(1))
+
+if (38 in keysDown == false) { // Player holding up
+		  y = 0;
+		  alert("e")
+}
+if (40 in keysDown) { // Player holding down
+		  y = 0;
+    }
+    if (37 in keysDown) { // Player holding left
+		  x = 0;
+	}
+	if (39 in keysDown) { // Player holding right
+		  x = 0;
+	    }
+
+
+
+
+	     if (38 in keysDown) { // Player holding up
+		  y = -5;
+}
+if (40 in keysDown) { // Player holding down
+		  y = 5;
+    }
+    if (37 in keysDown) { // Player holding left
+		  x = -5;
+	}
+	if (39 in keysDown) { // Player holding right
+		  x = 5;
+	    }
+
+	    usr.geo_data.velocity = new Vector(x, y)
+
+
+    var policia_caco1 = (caco1.geo_data.position.get_coord(0) - policia.geo_data.position.get_coord(0))
+    var policia_caco2 = (caco2.geo_data.position.get_coord(1) - policia.geo_data.position.get_coord(1))
 		 if(policia_caco1 < 0)
 		     policia_caco1 *= -1
 	         if(policia_caco2 < 0)
