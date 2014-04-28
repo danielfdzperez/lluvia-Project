@@ -95,14 +95,16 @@ document.onkeyup=function(e) {
 
 
 	 var keysDown = {};
+	 var keysUp = {};
 
 addEventListener("keydown", function (e) {
 	keysDown[e.keyCode] = true;
+	delete keysUp[e.keyCode];
 	    }, false);
 
 addEventListener("keyup", function (e) {
-	keysDown[e.keyCode] = false;
-	    //delete keysDown[e.keyCode];
+	keysUp[e.keyCode] = true;
+	    delete keysDown[e.keyCode];
 	    }, false);
 
 
@@ -112,17 +114,17 @@ var y= usr.geo_data.velocity.get_coord(1);
 
 	 function persecucion(){
 
-if (38 in keysDown == false) { // Player holding up
+if (38 in keysUp ) { // Player holding up
 		  y = 0;
-		  alert("e")
+		  
 }
-if (40 in keysDown) { // Player holding down
+if (40 in keysUp) { // Player holding down
 		  y = 0;
     }
-    if (37 in keysDown) { // Player holding left
+    if (37 in keysUp) { // Player holding left
 		  x = 0;
 	}
-	if (39 in keysDown) { // Player holding right
+	if (39 in keysUp) { // Player holding right
 		  x = 0;
 	    }
 
@@ -130,16 +132,16 @@ if (40 in keysDown) { // Player holding down
 
 
 	     if (38 in keysDown) { // Player holding up
-		  y = -5;
+		  y = -20;
 }
 if (40 in keysDown) { // Player holding down
-		  y = 5;
+		  y = 20;
     }
     if (37 in keysDown) { // Player holding left
-		  x = -5;
+		  x = -20;
 	}
 	if (39 in keysDown) { // Player holding right
-		  x = 5;
+		  x = 20;
 	    }
 
 	    usr.geo_data.velocity = new Vector(x, y)
