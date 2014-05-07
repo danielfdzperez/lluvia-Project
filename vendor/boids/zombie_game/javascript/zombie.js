@@ -14,13 +14,13 @@
     var img=new Image()
     var img_up=new Image()
     var col = 0
-    var imagen = 2
+    var sprite = 0
 window.addEventListener('load', inicio, false);	
 
     function inicio(){
         canvas = document.getElementById('canvas');
         ctx = canvas.getContext('2d');
-        img.src="images/z.png"
+        img.src="images/sprite.png"
         //img_up.src="images/z2.png"
 	bucle();
     }
@@ -72,31 +72,30 @@ window.addEventListener('load', inicio, false);
 	    y -= 20;
 	   // pintar_tablero(img_up,27)
 	    animacion ++
-	    if (imagen != 1){
-              img.src="images/z2.png"
-              imagen = 1
-	      col = 27
-	    }
+            if(sprite != 0)
+		sprite = 0
 	    tecla_presionada[38] = false
 	}
 	if (tecla_presionada[40]) { // Player holding down
 	    y += 20;
 	    animacion ++
-		if(imagen != 2){
-                   img.src="images/z.png"
-		   imagen = 2
-	           col = 0
-		}
+            if(sprite != 1*49)
+		sprite = 1*49
 	   // pintar_tablero(img,0)
 	    tecla_presionada[40] = false
 	}
 	if (tecla_presionada[37]) { // Player holding left
 	    x -= 20;
+	    animacion ++
+            if(sprite != 2*49)
+		sprite = 2*49
 	    tecla_presionada[37] = false
 	}
 	if (tecla_presionada[39]) { // Player holding right
 	    x += 20;
 	    animacion ++
+            if(sprite != 3*49)
+		sprite = 3*49
 	    tecla_presionada[39] = false
 	}
 
@@ -113,11 +112,11 @@ window.addEventListener('load', inicio, false);
 
     function pintar_tablero(){
 	ctx.fillStyle='#FFF'
-        if(animacion > 4)
+        if(animacion > 7)
 		animacion = 0
 
 	ctx.fillRect(0,0,canvas.width,canvas.height);
-	ctx.drawImage(img, animacion*49, col, 49, 49, x, y, 49,49)
+	ctx.drawImage(img, animacion*49, sprite, 49, 49, x, y, 49,49)
     }
 
 
