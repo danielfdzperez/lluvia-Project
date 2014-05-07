@@ -11,19 +11,23 @@
     var tecla_suelta = {}
     var animacion = 0
     var counter=0;
-    var tileSheet=new Image();
+    var img=new Image()
+    var img_up=new Image()
+    var col = 0
+    var imagen = 2
 window.addEventListener('load', inicio, false);	
 
     function inicio(){
         canvas = document.getElementById('canvas');
         ctx = canvas.getContext('2d');
-        tileSheet.src="images/zombie_sprite.png"
+        img.src="images/z.png"
+        //img_up.src="images/z2.png"
 	bucle();
     }
     function bucle(){
 	setTimeout(bucle,200)
 	    acciones()
-	    pintar_tablero()
+	    pintar_tablero(col)
     }
 
     function acciones(){
@@ -66,10 +70,24 @@ window.addEventListener('load', inicio, false);
 	 */
 	if (tecla_presionada[38]) { // Player holding up
 	    y -= 20;
+	   // pintar_tablero(img_up,27)
+	    animacion ++
+	    if (imagen != 1){
+              img.src="images/z2.png"
+              imagen = 1
+	      col = 27
+	    }
 	    tecla_presionada[38] = false
 	}
 	if (tecla_presionada[40]) { // Player holding down
 	    y += 20;
+	    animacion ++
+		if(imagen != 2){
+                   img.src="images/z.png"
+		   imagen = 2
+	           col = 0
+		}
+	   // pintar_tablero(img,0)
 	    tecla_presionada[40] = false
 	}
 	if (tecla_presionada[37]) { // Player holding left
@@ -95,28 +113,11 @@ window.addEventListener('load', inicio, false);
 
     function pintar_tablero(){
 	ctx.fillStyle='#FFF'
-	    var mov
-	    if(animacion > 3)
+        if(animacion > 4)
 		animacion = 0
-		    switch(animacion){
-			case 0:
-			      mov = 0
-			break
-			case 1:
-			      mov = 50
-			break
-			case 2:
-			      mov = 104
-			break
-			case 3:
-			      mov=166
-			break
-		    }
 
 	ctx.fillRect(0,0,canvas.width,canvas.height);
-	ctx.drawImage(tileSheet, mov, 80, 50, 80, x, y, 60,80)
-	    if(animacion > 3)
-		animacion = 0
+	ctx.drawImage(img, animacion*49, col, 49, 49, x, y, 49,49)
     }
 
 
