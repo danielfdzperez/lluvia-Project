@@ -11,23 +11,23 @@ $K_app_dependencies = [
 	{ name: "itinerant_behaviors/seek_behavior.js",            description: "Seek" },
 	{ name: "itinerant_behaviors/flee_behavior.js",            description: "Flee" },
 	{ name: "itinerant_behaviors/pursue_behavior.js",          description: "Pursue" },
-	//{ name: "herd_behaviors/alignment_behavior.js",            description: "Tries to keep the same direction" },
+	//{ name: "herd_behaviors/alignment_behavior.js",          description: "Tries to keep the same direction" },
 	{ name: "itinerant_behaviors/wander_behavior.js",          description: "Wander" },
 	{ name: "itinerant_behaviors/wander_around_behaviour.js",  description: "Wander changing the target." },
 	{ name: "itinerant_behaviors/wall_following_behavior.js",  description: "Wall Following" },
 	{ name: "itinerant_behaviors/path_following_behavior.js",  description: "Path Following" },
-	{ name: "brain.js",              description: "Boid Brain." }
+	{ name: "brain.js",                                        description: "Boid Brain." }
            ]
         },
         {	module: "Boids Application",
             description: "Boids Demo App.",
             path: "",
             files: [
-        	{ name: "boid.js",               description: "One Boid." },
+        	{ name: "boid.js",                     description: "One Boid." },
         	{ name: "world_interface.js",          description: "World Interface." },
         	{ name: "boid_editor.js",              description: "Boid panel editor." },
-        	{ name: "world.js",                    description: "The world where all boids live." },
-        	{ name: "prueba.js",                    description: "Prueba" },
+            { name: "world.js",                    description: "The world where all boids live." },
+        	{ name: "prueba.js",                   description: "Prueba" },
         	{ name: "main.js",                     description: "main function." }
                    ]
         }

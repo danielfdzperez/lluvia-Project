@@ -4,6 +4,7 @@ body{
 
 #canvas{
   float: left;
+  border: solid 1px black;
 }
 
 #screen{
@@ -24,4 +25,8 @@ body{
 
 .Panel div{
   cursor: pointer;
+}
+
+#lluvia_load{
+  display: none;
 }

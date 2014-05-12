@@ -17,15 +17,25 @@ var usr = w.new_boid( { colour: "black",
    })
 
 
-//var a = new Zombie()
+var b = w.new_boid( function(config){
+ 	config.colour = "purple"
+ 	config.vel_max = 20
+    config.brain.activate('seek')
+    config.brain.get_behavior('seek').set_target(usr)
+ })
+
+
+// var c = w.new_boid_of_zombie(Zombie, function(config){
+// 	config.colour = "purple"
+// })
 
 var b = w.new_boid(new Zombie())
-         b.vel_max = 20
-	 b.brain.activate('seek')
-	 b.brain.get_behavior('seek').set_target(usr)
+b.vel_max = 20
+b.brain.activate('seek')
+b.brain.get_behavior('seek').set_target(usr)
 
-	 var keys_down = {} 
-	 var keys_up = {} 
+var keys_down = {} 
+var keys_up = {} 
 
 addEventListener("keydown", function (e) {
 	keys_down[e.keyCode] = true 
@@ -39,38 +49,33 @@ addEventListener("keyup", function (e) {
 
 
 
-         var x= usr.geo_data.velocity.get_coord(0) 
-         var y= usr.geo_data.velocity.get_coord(1) 
+    var x= usr.geo_data.velocity.get_coord(0) 
+    var y= usr.geo_data.velocity.get_coord(1) 
 
-	 function persecucion(){
+    function persecucion(){
 
-            if (87 in keys_up)  // Player holding up
+        if (87 in keys_up)  // Player holding up
 		  y = 0 
 	    if (83 in keys_up)  // Player holding down
-		y = 0 
+		  y = 0 
 	    if (65 in keys_up)  // Player holding left
-		x = 0 
+		  x = 0 
 	    if (68 in keys_up)  // Player holding right
 		  x = 0 
 
-
-
-
 	    if (87 in keys_down)  // Player holding up
-		y = -20 
+		  y = -20 
 	     
 	    if (83 in keys_down)  // Player holding down
-		y = 20 
+		  y = 20 
 	     
 	    if (65 in keys_down)  // Player holding left
-		x = -20 
+		  x = -20 
 	     
 	    if (68 in keys_down)  // Player holding right
-		x = 20 
-	     
+		  x = 20 
 
-
-            if(b.geo_data.position.get_coord(0) - usr.geo_data.position.get_coord(0) < 1 &&
+         if(b.geo_data.position.get_coord(0) - usr.geo_data.position.get_coord(0) < 1 &&
 		    b.geo_data.position.get_coord(1) - usr.geo_data.position.get_coord(1) < 1)
 		//alert("te cogio" + b.geo_data.position.get_coord(0)  + " " + usr.geo_data.position.get_coord(0))
 		//b.vel_max = 0
