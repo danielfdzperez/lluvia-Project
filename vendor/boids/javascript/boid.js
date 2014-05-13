@@ -16,7 +16,9 @@
 //require('Mathematics')
 
 Boid.prototype.constructor = Boid
-
+var img = new Image()
+    img.src="images/sprite-bueno.png"
+    var rotacion = 1
 function Boid(config_object, block){
 
     var that = this
@@ -177,44 +179,68 @@ Boid.prototype.draw = function(ctx){
     var p = this.geo_data.position;
     var v = this.geo_data.velocity;
     var a = this.geo_data.acceleration;
+    var x = this.geo_data.position.get_coord(0)
+    var y = this.geo_data.position.get_coord(1)
 
-    ctx.fillStyle = this.colour
-    ctx.strokeStyle = "black"
-    ctx.beginPath();
-    ctx.arc(p.get_coord(0), p.get_coord(1), 10, 0, Math.PI*2, true);
-    ctx.closePath();
-    ctx.fill();
+    //alert(v.get_coord(1) + " x:" + v.get_coord(0) + " r:" + rotacion)
+    if(v.get_coord(1) > 0 && v.get_coord(0) == 0 && rotacion != 180){
+	ctx.save();
+	var a = 50*Math.PI/180 
+	    alert (a)
+        ctx.rotate(a);
 
-    ctx.beginPath();
-    ctx.arc(p.get_coord(0), p.get_coord(1), 12, 0, Math.PI*2, true);
-    ctx.closePath();
-    ctx.stroke()
-
-    if (this.focused){
-        ctx.strokeStyle = "red"
-        ctx.beginPath();
-        ctx.arc(p.get_coord(0), p.get_coord(1), 18, 0, Math.PI*2, true);
-        ctx.closePath();
-        ctx.stroke()
+        ctx.translate(100, 100) 
+	rotacion = 180
+        //ctx.restore();
+	    //alert(v.get_coord(1) + " x:" + v.get_coord(0) + " r:" + rotacion)
     }
+    if(v.get_coord(0) > 0 && v.get_coord(1) == 0 && rotacion != 0){
+        ctx.save();
+	ctx.translate(50, 50) 
+        ctx.rotate(360*Math.PI / 180);
+	rotacion = 0
+        //ctx.restore();
+    }
+  
+  ctx.fillStyle = this.colour
+  ctx.strokeStyle = "black"
+  ctx.beginPath();
+  ctx.arc(p.get_coord(0), p.get_coord(1), 10, 0, Math.PI*2, true);
+  ctx.closePath();
+  ctx.fill();
 
-    // todo: Move this to another class
+  ctx.beginPath();
+  ctx.arc(p.get_coord(0), p.get_coord(1), 12, 0, Math.PI*2, true);
+  ctx.closePath();
+  ctx.stroke()
+  ctx.drawImage(img, 4.125, 0, 50, 50, p.get_coord(0)-25, p.get_coord(1)-39, 60,60)
 
-    /* Speed */
-    ctx.strokeStyle = "black"
-    ctx.beginPath();
-    ctx.moveTo(p.get_coord(0), p.get_coord(1))
-    ctx.lineTo(p.get_coord(0) + v.get_coord(0), p.get_coord(1) + v.get_coord(1))
-    ctx.closePath();
-    ctx.stroke()
+  if (this.focused){
+      ctx.strokeStyle = "red"
+      ctx.beginPath();
+      ctx.arc(p.get_coord(0), p.get_coord(1), 18, 0, Math.PI*2, true);
+      ctx.closePath();
+      ctx.stroke()
+  }
 
-    /* Acceleration */
-    ctx.strokeStyle = "red"
-    ctx.beginPath();
-    ctx.moveTo(p.get_coord(0), p.get_coord(1))
-    ctx.lineTo(p.get_coord(0) + a.get_coord(0), p.get_coord(1) + a.get_coord(1))
-    ctx.closePath();
-    ctx.stroke()
+  // todo: Move this to another class
+
+  /* Speed */
+  ctx.strokeStyle = "black"
+  ctx.beginPath();
+  ctx.moveTo(p.get_coord(0), p.get_coord(1))
+  ctx.lineTo(p.get_coord(0) + v.get_coord(0), p.get_coord(1) + v.get_coord(1))
+  ctx.closePath();
+  ctx.stroke()
+
+  /* Acceleration */
+  ctx.strokeStyle = "red"
+  ctx.beginPath();
+  ctx.moveTo(p.get_coord(0), p.get_coord(1))
+  ctx.lineTo(p.get_coord(0) + a.get_coord(0), p.get_coord(1) + a.get_coord(1))
+  ctx.closePath();
+  ctx.stroke()
+
 
     /* It makes nonsense since behaviors are targeted now */
 //    if (this.brain.is_in$U("seek") ){

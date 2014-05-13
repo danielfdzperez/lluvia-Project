@@ -10,7 +10,7 @@ function main(){
 
 var usr = w.new_boid( { colour: "black",
                  geo_data:  {
-                               position: new Vector(300, 180),
+                               position: new Vector(200, 200),
                                velocity: new Vector(0, 0),
                                acceleration: new Vector(0, 0)
                             }
@@ -54,7 +54,7 @@ addEventListener("keyup", function (e) {
 
     function persecucion(){
 
-        if (87 in keys_up)  // Player holding up
+            if (87 in keys_up)  // Player holding up
 		  y = 0 
 	    if (83 in keys_up)  // Player holding down
 		  y = 0 
