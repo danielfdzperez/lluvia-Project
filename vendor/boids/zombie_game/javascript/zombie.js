@@ -15,12 +15,16 @@
     var img_up=new Image()
     var col = 0
     var sprite = 0
+    var TO_RADIANS = Math.PI/180; 
+    var a = 1
 window.addEventListener('load', inicio, false);	
 
     function inicio(){
         canvas = document.getElementById('canvas');
         ctx = canvas.getContext('2d');
         img.src="images/sprite-bueno.png"
+	    y = canvas.height/2
+	    x = canvas.width/2
         //img_up.src="images/z2.png"
 	bucle();
     }
@@ -68,6 +72,10 @@ window.addEventListener('load', inicio, false);
 	   x += 0;
 	   }
 	 */
+	if(tecla_presionada[32]){
+	    tecla_presionada[32] = false
+	    alert("estas:"+ y + " x: " + x)
+	}
 	if (tecla_presionada[38]) { // Player holding up
 	    y -= 20;
 	   // pintar_tablero(img_up,27)
@@ -115,9 +123,24 @@ window.addEventListener('load', inicio, false);
 	    animacion %= 7
         //if(animacion > 7)
 	//	animacion = 0
+	ctx.save(); 
+	 
+	// move to the middle of where we want to draw our image
+        ctx.translate(x+x, y+y);
+		 
+	// rotate around that point, converting our 
+	// angle from degrees to radians 
+        ctx.rotate(a * TO_RADIANS);
+	a++
 
+	// draw it up and to the left by half the width
+	// and height of the image 
 	ctx.fillRect(0,0,canvas.width,canvas.height);
-	ctx.drawImage(img, animacion*49.125, sprite, 50, 50, x, y, 60,60)
+	ctx.drawImage(img, animacion*49.125, 0, 50, 50, x,y ,60,60);
+	ctx.restore(); 
+
+	// and restore the co-ords to how they were when we began
+//	ctx.drawImage(img, animacion*49.125, sprite, 50, 50, x, y, 60,60)
     }
 
 

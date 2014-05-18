@@ -17,22 +17,22 @@ var usr = w.new_boid( { colour: "black",
    })
 
 
-var b = w.new_boid( function(config){
- 	config.colour = "purple"
- 	config.vel_max = 20
-    config.brain.activate('seek')
-    config.brain.get_behavior('seek').set_target(usr)
- })
-
-
-// var c = w.new_boid_of_zombie(Zombie, function(config){
+//var b = w.new_boid( function(config){
 // 	config.colour = "purple"
+// 	config.vel_max = 20
+//    config.brain.activate('seek')
+//    config.brain.get_behavior('seek').set_target(usr)
 // })
-
-var b = w.new_boid(new Zombie())
-b.vel_max = 20
-b.brain.activate('seek')
-b.brain.get_behavior('seek').set_target(usr)
+//
+//
+//// var c = w.new_boid_of_zombie(Zombie, function(config){
+//// 	config.colour = "purple"
+//// })
+//
+//var b = w.new_boid(new Zombie())
+//b.vel_max = 20
+//b.brain.activate('seek')
+//b.brain.get_behavior('seek').set_target(usr)
 
 var keys_down = {} 
 var keys_up = {} 
@@ -75,15 +75,15 @@ addEventListener("keyup", function (e) {
 	    if (68 in keys_down)  // Player holding right
 		  x = 20 
 
-         if(b.geo_data.position.get_coord(0) - usr.geo_data.position.get_coord(0) < 1 &&
-		    b.geo_data.position.get_coord(1) - usr.geo_data.position.get_coord(1) < 1)
-		//alert("te cogio" + b.geo_data.position.get_coord(0)  + " " + usr.geo_data.position.get_coord(0))
-		//b.vel_max = 0
-		b.live -= 101
-		    if(b.live < 0){
-			b.vel_max = 0
-			Zombie.prototype.change(b)
-		    }
+//         if(b.geo_data.position.get_coord(0) - usr.geo_data.position.get_coord(0) < 1 &&
+//		    b.geo_data.position.get_coord(1) - usr.geo_data.position.get_coord(1) < 1)
+//		//alert("te cogio" + b.geo_data.position.get_coord(0)  + " " + usr.geo_data.position.get_coord(0))
+//		//b.vel_max = 0
+//		b.live -= 101
+//		    if(b.live < 0){
+//			b.vel_max = 0
+//			Zombie.prototype.change(b)
+//		    }
 	    usr.geo_data.velocity = new Vector(x, y)
 	 }
 	 setInterval(persecucion,30) 

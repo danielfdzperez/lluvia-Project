@@ -16,6 +16,7 @@
 //require('Mathematics')
 
 Boid.prototype.constructor = Boid
+var con = 0
 var img = new Image()
     img.src="images/sprite-bueno.png"
     var rotacion = 1
@@ -175,7 +176,7 @@ Boid.prototype.run = function(current_time){
  *
  */
 Boid.prototype.draw = function(ctx){
-
+    var cambio = false;
     var p = this.geo_data.position;
     var v = this.geo_data.velocity;
     var a = this.geo_data.acceleration;
@@ -183,24 +184,7 @@ Boid.prototype.draw = function(ctx){
     var y = this.geo_data.position.get_coord(1)
 
     //alert(v.get_coord(1) + " x:" + v.get_coord(0) + " r:" + rotacion)
-    if(v.get_coord(1) > 0 && v.get_coord(0) == 0 && rotacion != 180){
-	ctx.save();
-	var a = 50*Math.PI/180 
-	    alert (a)
-        ctx.rotate(a);
-
-        ctx.translate(100, 100) 
-	rotacion = 180
-        //ctx.restore();
-	    //alert(v.get_coord(1) + " x:" + v.get_coord(0) + " r:" + rotacion)
-    }
-    if(v.get_coord(0) > 0 && v.get_coord(1) == 0 && rotacion != 0){
-        ctx.save();
-	ctx.translate(50, 50) 
-        ctx.rotate(360*Math.PI / 180);
-	rotacion = 0
-        //ctx.restore();
-    }
+    
   
   ctx.fillStyle = this.colour
   ctx.strokeStyle = "black"
@@ -213,7 +197,6 @@ Boid.prototype.draw = function(ctx){
   ctx.arc(p.get_coord(0), p.get_coord(1), 12, 0, Math.PI*2, true);
   ctx.closePath();
   ctx.stroke()
-  ctx.drawImage(img, 4.125, 0, 50, 50, p.get_coord(0)-25, p.get_coord(1)-39, 60,60)
 
   if (this.focused){
       ctx.strokeStyle = "red"
@@ -240,7 +223,29 @@ Boid.prototype.draw = function(ctx){
   ctx.lineTo(p.get_coord(0) + a.get_coord(0), p.get_coord(1) + a.get_coord(1))
   ctx.closePath();
   ctx.stroke()
-
+//  if(v.get_coord(1) > 0 && v.get_coord(0) == 0 && rotacion != 180){
+//        ctx.save()
+//	var a = 360*Math.PI/180 
+//        ctx.translate(50, 50) 
+//        ctx.rotate(a);
+//	rotacion = 180
+//        ctx.drawImage(img, 4.125, 0, 50, 50, p.get_coord(0)-25, p.get_coord(1)-39, 60,60)
+//	ctx.restore()
+//	cambio = true
+	    //alert(v.get_coord(1) + " x:" + v.get_coord(0) + " r:" + rotacion)
+//    }
+      if(con % 6 == 5){
+        ctx.save()
+	ctx.translate(p.get_coord(0)+25, p.get_coord(1)+39 ) 
+        ctx.rotate(rotacion*Math.PI / 180)
+        ctx.drawImage(img, 4.125, 0, 48, 48, -48,-48, 48,48)
+	ctx.restore()
+	cambio = true 
+	rotacion += 10
+      }
+      con ++
+ // if(!cambio)
+    //    ctx.drawImage(img, 4.125, 0, 50, 50, p.get_coord(0)-25, p.get_coord(1)-39, 60,60)
 
     /* It makes nonsense since behaviors are targeted now */
 //    if (this.brain.is_in$U("seek") ){
