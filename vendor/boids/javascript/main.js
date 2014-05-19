@@ -16,7 +16,6 @@ var usr = w.new_boid( { colour: "black",
                             }
    })
 
-
 //var b = w.new_boid( function(config){
 // 	config.colour = "purple"
 // 	config.vel_max = 20
