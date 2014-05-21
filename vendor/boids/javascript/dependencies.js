@@ -19,15 +19,17 @@ $K_app_dependencies = [
 	{ name: "brain.js",                                        description: "Boid Brain." }
            ]
         },
-        {	module: "Boids Application",
+        {   module: "Boids Application",
             description: "Boids Demo App.",
             path: "",
             files: [
         	{ name: "boid.js",                     description: "One Boid." },
         	{ name: "world_interface.js",          description: "World Interface." },
         	{ name: "boid_editor.js",              description: "Boid panel editor." },
-            { name: "world.js",                    description: "The world where all boids live." },
-        	{ name: "prueba.js",                   description: "Prueba" },
+        	{ name: "character.js",                description: "Character Class" },
+        	{ name: "hunter.js",                   description: "Hunter Class" },
+        	{ name: "zombie.js",                   description: "Zombie class" },
+                { name: "world.js",                    description: "The world where all boids live." },
         	{ name: "main.js",                     description: "main function." }
                    ]
         }

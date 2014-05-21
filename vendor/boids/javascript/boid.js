@@ -16,10 +16,6 @@
 //require('Mathematics')
 
 Boid.prototype.constructor = Boid
-var con = 0
-var img = new Image()
-    img.src="images/sprite-bueno.png"
-var movimiento = 0
 function Boid(config_object, block){
 
     var that = this
@@ -179,23 +175,20 @@ Boid.prototype.draw = function(ctx){
     var p = this.geo_data.position;
     var v = this.geo_data.velocity;
     var a = this.geo_data.acceleration;
-    var x = this.geo_data.position.get_coord(0)
-    var y = this.geo_data.position.get_coord(1)
-    this.rotacion = 0
 
     
   
-  //ctx.fillStyle = this.colour
-  //ctx.strokeStyle = "black"
-  //ctx.beginPath();
-  //ctx.arc(p.get_coord(0), p.get_coord(1), 10, 0, Math.PI*2, true);
-  //ctx.closePath();
-  //ctx.fill();
+  ctx.fillStyle = this.colour
+  ctx.strokeStyle = "black"
+  ctx.beginPath();
+  ctx.arc(p.get_coord(0), p.get_coord(1), 10, 0, Math.PI*2, true);
+  ctx.closePath();
+  ctx.fill();
 
-  //ctx.beginPath();
-  //ctx.arc(p.get_coord(0), p.get_coord(1), 12, 0, Math.PI*2, true);
-  //ctx.closePath();
-  //ctx.stroke()
+  ctx.beginPath();
+  ctx.arc(p.get_coord(0), p.get_coord(1), 12, 0, Math.PI*2, true);
+  ctx.closePath();
+  ctx.stroke()
 
   if (this.focused){
       ctx.strokeStyle = "red"
@@ -223,55 +216,10 @@ Boid.prototype.draw = function(ctx){
   ctx.closePath();
   ctx.stroke()
 
-  /*Rotate image*/
-  ctx.save()
-  ctx.translate(p.get_coord(0), p.get_coord(1)) 
-
-  movimiento %= 7
-
-  if(v.get_coord(0) == 0 && v.get_coord(1) < 0){
-      movimiento ++
-      ctx.rotate(0*Math.PI / 180)
-  }
-
-  if(v.get_coord(0) > 0 && v.get_coord(1) < 0){
-      movimiento ++
-      ctx.rotate(45*Math.PI / 180)
-  }
-
-  if(v.get_coord(0) > 0 && v.get_coord(1) == 0){
-      movimiento ++
-      ctx.rotate(90*Math.PI / 180)
-  }
-
-  if(v.get_coord(0) > 0 && v.get_coord(1) > 0){
-      movimiento ++
-      ctx.rotate(135*Math.PI / 180)
-  }
-
-  if(v.get_coord(0) == 0 && v.get_coord(1) > 0){
-      movimiento ++
-      ctx.rotate(180*Math.PI / 180)
-  }
-
-  if(v.get_coord(0) < 0 && v.get_coord(1) > 0){
-      movimiento ++
-      ctx.rotate(225*Math.PI / 180)
-  }
-
-  if(v.get_coord(0) < 0 && v.get_coord(1) == 0){
-      movimiento ++
-      ctx.rotate(270*Math.PI / 180)
-  }
-
-  if(v.get_coord(0) < 0 && v.get_coord(1) < 0){
-      movimiento ++
-      ctx.rotate(315*Math.PI / 180)
-  }
 
 
-  ctx.drawImage(img, movimiento*49.125, 0, 48, 48, -24,-24, 48,48)
-  ctx.restore()
+
+
 
     /* It makes nonsense since behaviors are targeted now */
 //    if (this.brain.is_in$U("seek") ){
