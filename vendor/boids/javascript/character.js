@@ -56,7 +56,6 @@ Character.prototype.draw = function(ctx){
   ctx.save()
   ctx.translate(p.get_coord(0), p.get_coord(1))
   
-  this.movimiento %= 7
   
   if(v.get_coord(0) == 0 && v.get_coord(1) < 0){
       this.movimiento ++
@@ -64,40 +63,36 @@ Character.prototype.draw = function(ctx){
   }
 
   if(v.get_coord(0) > 0 && v.get_coord(1) < 0){
-      this.movimiento ++
 	  ctx.rotate(45*Math.PI / 180)
   }
 
   if(v.get_coord(0) > 0 && v.get_coord(1) == 0){
-      this.movimiento ++
 	  ctx.rotate(90*Math.PI / 180)
   }
 
   if(v.get_coord(0) > 0 && v.get_coord(1) > 0){
-      this.movimiento ++
 	  ctx.rotate(135*Math.PI / 180)
   }
 
   if(v.get_coord(0) == 0 && v.get_coord(1) > 0){
-      this.movimiento ++
 	  ctx.rotate(180*Math.PI / 180)
   }
 
   if(v.get_coord(0) < 0 && v.get_coord(1) > 0){
-      this.movimiento ++
 	  ctx.rotate(225*Math.PI / 180)
   }
 
   if(v.get_coord(0) < 0 && v.get_coord(1) == 0){
-      this.movimiento ++
 	  ctx.rotate(270*Math.PI / 180)
   }
 
   if(v.get_coord(0) < 0 && v.get_coord(1) < 0){
-      this.movimiento ++
 	  ctx.rotate(315*Math.PI / 180)
   }
 
+  if(v.get_coord(0) > 0 || v.get_coord(1) > 0 || v.get_coord(0) < 0 || v.get_coord(1) < 0)
+      this.movimiento ++
+  this.movimiento %= 7
 
   ctx.drawImage(this.img, this.movimiento*49.125, 0, 48, 48, -24,-24, 48,48)
       ctx.restore()

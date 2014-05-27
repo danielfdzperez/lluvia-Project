@@ -33,13 +33,13 @@ function main(){
     
    var usr = w.new_boid_of(Hunter)
    var prueba = []
-   for(var i=0; i<3; i++){
+  /* for(var i=0; i<3; i++){
        var aux
        prueba.push(aux = w.new_boid_of(Zombie))
        aux.vel_max = 20
        aux.brain.activate('seek')
        aux.brain.get_behavior('seek').set_target(usr)
-   }
+   }*/
    //var a = w.new_boid_of(Zombie)
 
    var keys_down = {} 
