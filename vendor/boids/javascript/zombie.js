@@ -1,11 +1,12 @@
 Zombie.prototype = new Character
 Zombie.prototype.constructor = Zombie
+
 var x = 151
 var color = "green"
 function Zombie(){
   this.img = new Image()
   this.img.src="images/sprite-bueno.png"
- // this.cont = 1
+  // this.cont = 1
   this.config = { 
                  colour: color,
                  geo_data:  {
@@ -15,8 +16,18 @@ function Zombie(){
                             }
    }
   Boid.call(this, this.config)
-      x += 100
-      color = "blue"
+  x +=30
+  color = "blue"
+}
+Zombie.create_new = function(w, zombies, usr){
+    var aux;
+    for(var i=0; i<20; i++){
+       zombies.push(aux = w.new_boid_of(Zombie))
+       aux.is_alive = true
+       aux.vel_max = 20
+       aux.brain.activate('seek')
+       aux.brain.get_behavior('seek').set_target(usr)
+   }
 }
 
 Zombie.prototype.update_physics = function(current_time){
@@ -31,7 +42,18 @@ Zombie.prototype.update_physics = function(current_time){
    // }
 }
 
-Zombie.prototype.change = function(personaje){
-    personaje.colour = "red"
+Zombie.prototype.die = function(){
+	this.colour = "red"
+   /* this.config = { 
+                 colour: "red",
+                 geo_data:  {
+                               position: new Vector(10, 200),
+                               velocity: new Vector(0, 0),
+                               acceleration: new Vector(0, 0)
+                            }
+   }
+
+    Boid.call(this, this.config)
+    */
 }
 

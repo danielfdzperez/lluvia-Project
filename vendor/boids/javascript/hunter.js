@@ -2,8 +2,9 @@ Hunter.prototype = new Character
 Hunter.prototype.constructor = Hunter
 
 function Hunter(config){
-this.img = new Image()
+  this.img = new Image()
   this.img.src="images/sprite-bueno.png"
+  this.is_alive = true
   this.config = { 
                  colour: "green",
                  geo_data:  {
