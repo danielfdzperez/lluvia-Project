@@ -17,7 +17,7 @@ function main(){
    var usr = w.new_boid_of(Hunter)   //The user
 
    var zombies = []                  //The aray containing the zombies
-   Zombie.create_new(w, zombies, usr) //This create 3 new zombies
+   var gun_shots = []
 
    var keys_down = {} 
    var keys_up = {} 
@@ -37,44 +37,47 @@ function main(){
    var x= usr.geo_data.velocity.get_coord(0) 
    var y= usr.geo_data.velocity.get_coord(1) 
    var cuenta = 0
-function persecucion(){
-
-   /*If key up*/
-   if (87 in keys_up)  // Player holding up
-       y = 0 
-   if (83 in keys_up)  // Player holding down
-       y = 0 
-   if (65 in keys_up)  // Player holding left
-       x = 0 
-   if (68 in keys_up)  // Player holding right
-       x = 0 
-   /*If kuy down*/
-   if (87 in keys_down)  // Player holding up
-       y = -20 
-   if (83 in keys_down)  // Player holding down
-       y = 20 
-   if (65 in keys_down)  // Player holding left
-       x = -20 
-   if (68 in keys_down)  // Player holding right
-       x = 20 
-   if (32 in keys_down){
-       //zombies.splice(cuenta, 1)
-       //alert(zombies[0].constructor.name)
-       //delete(zombies[0])
-       // Zombie.create_new(w, zombies, usr) //This create 3 new zombies
-       /*----------Dead Zombie Test---------------------
-       /  //alert(zombies.length)
-       /  //alert(w.get_boids()[0])
-       /  //for(var h in usr)
-       /    //  delete usr[h]
-       /  //alert(j)
-       /   //alert(usr.geo_data.position.get_coord(0))
-       /
-       /  //zombies.splice(0,1)  
-       /  //Zombie.crete_new(w, zombies, usr)
-       /  //alert(zombies.length)
-       /-----------------------------------------------*/
-   }
+   function acciones(){
+   
+      /*If key up*/
+      if (87 in keys_up)  // Player holding up
+          y = 0 
+      if (83 in keys_up)  // Player holding down
+          y = 0 
+      if (65 in keys_up)  // Player holding left
+          x = 0 
+      if (68 in keys_up)  // Player holding right
+          x = 0 
+      /*If kuy down*/
+      if (87 in keys_down)  // Player holding up
+          y = -20 
+      if (83 in keys_down)  // Player holding down
+          y = 20 
+      if (65 in keys_down)  // Player holding left
+          x = -20 
+      if (68 in keys_down)  // Player holding right
+          x = 20 
+      if (32 in keys_down){
+          
+      gun_shots.push(w.new_boid_of(Bullet, usr))
+      Zombie.create_new(w, zombies, usr) //This create 3 new zombies
+          //zombies.splice(cuenta, 1)
+          //alert(zombies[0].constructor.name)
+          //delete(zombies[0])
+          // Zombie.create_new(w, zombies, usr) //This create 3 new zombies
+          /*----------Dead Zombie Test---------------------
+          /  //alert(zombies.length)
+          /  //alert(w.get_boids()[0])
+          /  //for(var h in usr)
+          /    //  delete usr[h]
+          /  //alert(j)
+          /   //alert(usr.geo_data.position.get_coord(0))
+          /
+          /  //zombies.splice(0,1)  
+          /  //Zombie.crete_new(w, zombies, usr)
+          /  //alert(zombies.length)
+          /-----------------------------------------------*/
+      }
 
 
 //         if(b.geo_data.position.get_coord(0) - usr.geo_data.position.get_coord(0) < 1 &&
@@ -87,8 +90,8 @@ function persecucion(){
 //			Zombie.prototype.change(b)
 //		    }
    usr.geo_data.velocity = new Vector(x, y)
-}
-   setInterval(persecucion,30) 
+   }
+   setInterval(acciones,30) 
 
    w.start()
 }

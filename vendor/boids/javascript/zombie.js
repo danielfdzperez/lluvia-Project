@@ -10,7 +10,7 @@ function Zombie(){
   this.config = { 
                  colour: color,
                  geo_data:  {
-                               position: new Vector(x, 200),
+                               position: new Vector(Math.random() * 1000 % 300, 0),
                                velocity: new Vector(0, 0),
                                acceleration: new Vector(0, 0)
                             }
@@ -21,7 +21,7 @@ function Zombie(){
 }
 Zombie.create_new = function(w, zombies, usr){
     var aux;
-    for(var i=0; i<20; i++){
+    for(var i=0; i<1; i++){
        zombies.push(aux = w.new_boid_of(Zombie))
        aux.is_alive = true
        aux.vel_max = 20

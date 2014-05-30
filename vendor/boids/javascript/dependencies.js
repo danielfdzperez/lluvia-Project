@@ -27,6 +27,7 @@ $K_app_dependencies = [
         	{ name: "world_interface.js",          description: "World Interface." },
         	{ name: "boid_editor.js",              description: "Boid panel editor." },
         	{ name: "character.js",                description: "Character Class" },
+        	{ name: "bullet.js",                   description: "Bullet Class" },
         	{ name: "hunter.js",                   description: "Hunter Class" },
         	{ name: "zombie.js",                   description: "Zombie class" },
                 { name: "world.js",                    description: "The world where all boids live." },
