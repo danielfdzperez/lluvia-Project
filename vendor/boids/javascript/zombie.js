@@ -1,33 +1,45 @@
 Zombie.prototype = new Character
 Zombie.prototype.constructor = Zombie
 
-var x = 151
-var color = "green"
-function Zombie(){
-  this.img = new Image()
-  this.img.src="images/sprite-bueno.png"
-  // this.cont = 1
-  this.config = { 
-                 colour: color,
-                 geo_data:  {
-                               position: new Vector(Math.random() * 1000 % 300, 0),
-                               velocity: new Vector(0, 0),
-                               acceleration: new Vector(0, 0)
-                            }
-   }
-  Boid.call(this, this.config)
-  x +=30
-  color = "blue"
+var TDirection = {north: 0, northeast: 45, east: 90, southeast: 135, south: 180, southwest: 225, west: 270, northwest: 315}
+function Zombie(positions){
+ var spawn_position = new Coordinate(positions[0], positions[1])
+  GameElements.call(this, "images/sprite-bueno.png", TDirection.north, 48, 48, 7, 49.125, "sounds/zombie.mp3", 
+	            spawn_position.x, spawn_position.y)
+  Boid.call(this, this.configuration())
 }
+
 Zombie.create_new = function(w, zombies, usr){
-    var aux;
-    for(var i=0; i<1; i++){
-       zombies.push(aux = w.new_boid_of(Zombie))
-       aux.is_alive = true
-       aux.vel_max = 20
-       aux.brain.activate('seek')
-       aux.brain.get_behavior('seek').set_target(usr)
+    //for(var i=0; i<5; i++){
+       var zombie;
+       zombies.push(zombie = w.new_boid_of(Zombie, Zombie.spawn()))
+       zombie.vel_max = 20
+       zombie.brain.activate('seek')
+       zombie.brain.get_behavior('seek').set_target(usr)
+   //}
+}
+Zombie.spawn = function(){
+   var wall_spawn = Math.floor(Math.random() * 4) 
+   var positions = []
+   switch(wall_spawn){
+       case 0://canvas top
+       positions.push(0) //y
+       positions.push(Math.random() * 400)//x
+       break
+       case 1://canvas bottom
+       positions.push (400)
+       positions.push (Math.random() * 400)
+       break
+       case 2://canvas left
+       positions.push (Math.random() * 400)
+       positions.push (0)
+       break
+       case 3://canvas right
+       positions.push (Math.random() * 400)
+       positions.push (400) 
+       break
    }
+   return positions
 }
 
 Zombie.prototype.update_physics = function(current_time){

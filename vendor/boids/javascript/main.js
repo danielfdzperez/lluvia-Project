@@ -17,6 +17,7 @@ function main(){
    var usr = w.new_boid_of(Hunter)   //The user
 
    var zombies = []                  //The aray containing the zombies
+   Zombie.create_new(w, zombies, usr) 
    var gun_shots = []
 
    var keys_down = {} 
@@ -36,7 +37,6 @@ function main(){
 
    var x= usr.geo_data.velocity.get_coord(0) 
    var y= usr.geo_data.velocity.get_coord(1) 
-   var cuenta = 0
    function acciones(){
    
       /*If key up*/
@@ -60,7 +60,7 @@ function main(){
       if (32 in keys_down){
           
       gun_shots.push(w.new_boid_of(Bullet, usr))
-      Zombie.create_new(w, zombies, usr) //This create 3 new zombies
+      //Zombie.create_new(w, zombies, usr) //This create 3 new zombies
           //zombies.splice(cuenta, 1)
           //alert(zombies[0].constructor.name)
           //delete(zombies[0])
