@@ -27,6 +27,7 @@ $K_app_dependencies = [
         	{ name: "world_interface.js",          description: "World Interface." },
         	{ name: "boid_editor.js",              description: "Boid panel editor." },
         	{ name: "coordinate.js",               description: "Coordinate Class" },
+        	{ name: "future_position.js",          description: "future_position function" },
         	{ name: "game_elements.js",            description: "GameElements Class" },
         	{ name: "character.js",                description: "Character Class" },
         	{ name: "bullet.js",                   description: "Bullet Class" },

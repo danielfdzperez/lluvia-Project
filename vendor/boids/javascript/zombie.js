@@ -1,7 +1,10 @@
 Zombie.prototype = new Character
 Zombie.prototype.constructor = Zombie
 
+var canvas = document.getElementById('screener') 
 var TDirection = {north: 0, northeast: 45, east: 90, southeast: 135, south: 180, southwest: 225, west: 270, northwest: 315}
+var attack_sound = new Audio()
+attack_sound.src = "sounds/bite.mp3" 
 function Zombie(positions){
  var spawn_position = new Coordinate(positions[0], positions[1])
   GameElements.call(this, "images/sprite-bueno.png", TDirection.north, 48, 48, 7, 49.125, "sounds/zombie.mp3", 
@@ -24,18 +27,18 @@ Zombie.spawn = function(){
    switch(wall_spawn){
        case 0://canvas top
        positions.push(0) //y
-       positions.push(Math.random() * 400)//x
+       positions.push(Math.random() * canvas.width)//x
        break
        case 1://canvas bottom
        positions.push (400)
-       positions.push (Math.random() * 400)
+       positions.push (Math.random() * canvas.width)
        break
        case 2://canvas left
-       positions.push (Math.random() * 400)
+       positions.push (Math.random() * canvas.heigt)
        positions.push (0)
        break
        case 3://canvas right
-       positions.push (Math.random() * 400)
+       positions.push (Math.random() * canvas.heigt)
        positions.push (400) 
        break
    }
@@ -54,6 +57,21 @@ Zombie.prototype.update_physics = function(current_time){
    // }
 }
 
+Zombie.actions = function(zombies, hunter){
+   var hunter_pos = new Coordinate(hunter.geo_data.position.get_coord(1), hunter.geo_data.position.get_coord(0))
+   for(var i=0; i<zombies.length; i++){
+       if(zombies[i].is_alive){
+          var zombie_pos = new Coordinate(zombies[i].geo_data.position.get_coord(1), zombies[i].geo_data.position.get_coord(0))
+	  if(hunter_pos.y <= zombie_pos.y+24 && hunter_pos.y >= zombie_pos.y-24 && hunter_pos.x <= zombie_pos.x+24 && 
+	     hunter_pos.x >= zombie_pos.x-24){
+	      hunter.live --
+              attack_sound.play()	
+	      if(hunter.live <= 0)
+		  alert("Final")
+	  }
+       }
+   }
+}
 Zombie.prototype.die = function(){
 	this.colour = "red"
    /* this.config = { 

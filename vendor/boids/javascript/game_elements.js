@@ -124,7 +124,6 @@ GameElements.prototype.configuration = function(){
                             }
    }
 }
-
-GameElements.prototype.sound = function(){
+/*GameElements.prototype.sound = function(){
     
-}
+}*/
