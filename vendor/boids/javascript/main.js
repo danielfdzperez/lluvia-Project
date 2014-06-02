@@ -7,7 +7,7 @@ var keys_down = {}
 var keys_up = {}
 var level = 1
 var cont = 0
-
+var info = null
 function main(){
    w = new World()
    var boid_list = new WorldInterface("boid_list_content")
@@ -20,6 +20,7 @@ function main(){
     
    usr = w.new_boid_of(Hunter)   //The user
 
+   info = document.getElementById("info_player")
    run()
    
    w.start()
@@ -28,15 +29,27 @@ function main(){
 function run(){
        setTimeout(run, 20)
        actions()
+       level_info()
 } 
 
 function actions(){
    
    if(zombies.length < level * 5 )
       Zombie.create_new(w, zombies, usr) 
-   usr.actions(keys_down, keys_up, w, gun_shots)  
+   usr.actions(keys_down, keys_up, w, gun_shots) 
    Bullet.actions(gun_shots, zombies)
    Zombie.actions(zombies, usr)
+}
+function level_info(){
+
+   var end_level = 0
+   for(var i = 0; i < zombies.length; i++)
+      if(!zombies[i].is_alive)
+	  end_level ++
+   if(end_level == zombies.length)
+       level ++
+
+   info.innerHTML = "Live: " + usr.live + "<br>" + "Level: " + level + "Surprise " + zombies[2].surprise
 }
 
 addEventListener("keydown", function (e) {

@@ -107,9 +107,13 @@ GameElements.prototype.draw = function(ctx){
   if(this.constructor.name == 'Zombie')
       this.sound.play()
 
+
   ctx.drawImage(this.img, this.movement*this.real_width, 0, this.img_width, this.img_height, 
 	        -this.img_width/2, -this.img_height/2, this.img_width,this.img_height)
   ctx.restore()
+
+  //if(this.constructor.name == 'Hunter')
+  //  ctx.fillText('Life: '+ this.life ,150,0)
 
 }
 

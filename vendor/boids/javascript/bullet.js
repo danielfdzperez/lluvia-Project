@@ -3,8 +3,6 @@ Bullet.prototype.constructor = Bullet
 
 var canvas = document.getElementById('screener') 
 var TDirection = {north: 0, northeast: 45, east: 90, southeast: 135, south: 180, southwest: 225, west: 270, northwest: 315}
-var zombie_die = new Audio()
-zombie_die.src = "sounds/zombie_die.mp3"
 function Bullet(user){
     var pos = new Coordinate(user.geo_data.position.get_coord(1), user.geo_data.position.get_coord(0))
     GameElements.call(this, "images/bullet.png", user.direction, 6, 11, 1, 6, "sounds/shot.mp3", pos.x, pos.y)
@@ -73,9 +71,7 @@ Bullet.actions = function(bullets, zombies){
 	         bullets[i].is_moving = false
 		 zombies[z].live -= 20
 		 if(zombies[z].live <= 0){
-		    zombie_die.play()
-		    zombies[z].is_alive = false
-                    zombies[z].geo_data.position = new Vector(-10, 0)
+		    zombies[z].die()
 		 }
 	      }
 	   }

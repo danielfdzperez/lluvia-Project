@@ -4,9 +4,13 @@ Zombie.prototype.constructor = Zombie
 var canvas = document.getElementById('screener') 
 var TDirection = {north: 0, northeast: 45, east: 90, southeast: 135, south: 180, southwest: 225, west: 270, northwest: 315}
 var attack_sound = new Audio()
+var zombie_die = new Audio()
+zombie_die.src = "sounds/zombie_die.mp3"
 attack_sound.src = "sounds/bite.mp3" 
 function Zombie(positions){
- var spawn_position = new Coordinate(positions[0], positions[1])
+
+  this.surprise = (Math.floor(Math.random() * 10) == 5)
+  var spawn_position = new Coordinate(positions[0], positions[1])
   GameElements.call(this, "images/sprite-bueno.png", TDirection.north, 48, 48, 7, 49.125, "sounds/zombie.mp3", 
 	            spawn_position.x, spawn_position.y)
   Boid.call(this, this.configuration())
@@ -64,7 +68,7 @@ Zombie.actions = function(zombies, hunter){
           var zombie_pos = new Coordinate(zombies[i].geo_data.position.get_coord(1), zombies[i].geo_data.position.get_coord(0))
 	  if(hunter_pos.y <= zombie_pos.y+24 && hunter_pos.y >= zombie_pos.y-24 && hunter_pos.x <= zombie_pos.x+24 && 
 	     hunter_pos.x >= zombie_pos.x-24){
-	      hunter.live --
+	      hunter.live -= 0.1
               attack_sound.play()	
 	      if(hunter.live <= 0)
 		  alert("Final")
@@ -73,7 +77,9 @@ Zombie.actions = function(zombies, hunter){
    }
 }
 Zombie.prototype.die = function(){
-	this.colour = "red"
+    zombie_die.play()
+    this.is_alive = false
+    this.geo_data.position = new Vector(-10, 0)
    /* this.config = { 
                  colour: "red",
                  geo_data:  {
@@ -86,4 +92,3 @@ Zombie.prototype.die = function(){
     Boid.call(this, this.config)
     */
 }
-
