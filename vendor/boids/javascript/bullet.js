@@ -57,7 +57,7 @@ function Bullet(user){
     this.sound.play()
 }
 
-Bullet.actions = function(bullets, zombies){
+Bullet.actions = function(bullets, zombies, w){
     for(var i=0; i<bullets.length; i++){
        if(bullets[i].is_moving){
            var pos = new Coordinate(bullets[i].geo_data.position.get_coord(1), 
@@ -67,19 +67,30 @@ Bullet.actions = function(bullets, zombies){
               var zombie_pos = new Coordinate(zombies[z].geo_data.position.get_coord(1), 
 		  zombies[z].geo_data.position.get_coord(0))
 	      if(pos.y <= zombie_pos.y+24 && pos.y >= zombie_pos.y-24 && pos.x <= zombie_pos.x+24 && pos.x >= zombie_pos.x-24){
-                 bullets[i].geo_data.velocity = new Vector(0, 0)
-	         bullets[i].is_moving = false
+                 //bullets[i].geo_data.velocity = new Vector(0, 0)
+	         //bullets[i].is_moving = false
+		 bullets[i].die(bullets, i, w)
 		 zombies[z].live -= 20
 		 if(zombies[z].live <= 0){
-		    zombies[z].die()
+		    zombies[z].die(zombies, z, w)
 		 }
 	      }
 	   }
 	   /*The bullet left the board*/
            if(!(pos.y > 0 && pos.y < canvas.height && pos.x > 0 && pos.x < canvas.width)){
-               bullets[i].geo_data.velocity = new Vector(0, 0)
-	       bullets[i].is_moving = false
+		 bullets[i].die(bullets, i, w)
+               //bullets[i].geo_data.velocity = new Vector(0, 0)
+	       //bullets[i].is_moving = false
 	   }
-       }
+       } //end if
+    } //end for
+} //end function
+
+Bullet.prototype.die = function (array, pos, w){
+    for(var i in w.threads){
+        if(w.threads[i].object == this){
+            w.threads.splice(i, 1)
+         }
     }
+    array.splice(pos, 1)
 }

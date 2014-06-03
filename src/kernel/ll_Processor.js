@@ -57,9 +57,21 @@ Processor.prototype.register = function(cObject, solicitorF){
 */
 Processor.prototype.kill = function(rObject, solicitorF){
   for (var i in this.threads)
-    if (this.threads[i] == {object: rObject, solicitor: solicitorF})
+    if (this.threads[i] == {object: rObject, solicitor: solicitorF}){
+     alert(this.threads[i] == {object: rObject, solicitor: solicitorF})
      this.threads.slice(i,i+1);
+    }
 }
+//Processor.prototype.kill = function(rObject, solicitorF){       
+//    alert(this.threads.length)
+//    for (var i=0; i<this.threads.length; i++) 
+//	if (this.threads[i].object == rObject && this.threads[i].solicitor == solicitorF )               
+//	    this.threads.splice(i,1);        
+//
+//    alert(this.threads.length)
+//                                 
+//}
+
 
 /**
  * Execute all threads one step.

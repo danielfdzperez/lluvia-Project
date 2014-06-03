@@ -22,8 +22,7 @@ function main(){
 
    info = document.getElementById("info_player")
    run()
-   
-   w.start()
+      w.start()
 }
 
 function run(){
@@ -31,14 +30,14 @@ function run(){
        actions()
        level_info()
 } 
-
+ 
 function actions(){
    
    if(zombies.length < level * 5 )
-      Zombie.create_new(w, zombies, usr) 
+      Zombie.create_new(w, zombies, usr)
    usr.actions(keys_down, keys_up, w, gun_shots) 
-   Bullet.actions(gun_shots, zombies)
-   Zombie.actions(zombies, usr)
+   Bullet.actions(gun_shots, zombies, w)
+   Zombie.actions(zombies, usr, w)
 }
 function level_info(){
 
@@ -47,9 +46,9 @@ function level_info(){
       if(!zombies[i].is_alive)
 	  end_level ++
    if(end_level == zombies.length)
-       level ++
+       level = ++ 
 
-   info.innerHTML = "Live: " + usr.live + "<br>" + "Level: " + level + "Surprise " + zombies[2].surprise
+   info.innerHTML = "Live: " + usr.live + "<br>" + "Level: " + level
 }
 
 addEventListener("keydown", function (e) {

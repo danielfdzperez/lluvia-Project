@@ -68,28 +68,20 @@ Zombie.actions = function(zombies, hunter){
           var zombie_pos = new Coordinate(zombies[i].geo_data.position.get_coord(1), zombies[i].geo_data.position.get_coord(0))
 	  if(hunter_pos.y <= zombie_pos.y+24 && hunter_pos.y >= zombie_pos.y-24 && hunter_pos.x <= zombie_pos.x+24 && 
 	     hunter_pos.x >= zombie_pos.x-24){
-	      hunter.live -= 0.1
+	      hunter.live -= 1
               attack_sound.play()	
 	      if(hunter.live <= 0)
-		  alert("Final")
+		  var a;
 	  }
        }
    }
 }
-Zombie.prototype.die = function(){
+Zombie.prototype.die = function(array, pos, w){
     zombie_die.play()
-    this.is_alive = false
-    this.geo_data.position = new Vector(-10, 0)
-this.my_world.kill(this)
-   /* this.config = { 
-                 colour: "red",
-                 geo_data:  {
-                               position: new Vector(10, 200),
-                               velocity: new Vector(0, 0),
-                               acceleration: new Vector(0, 0)
-                            }
-   }
-
-    Boid.call(this, this.config)
-    */
+    for(var i in w.threads)
+        if(w.threads[i].object == this)
+            w.threads.splice(i, 1)
+    array.splice(pos, 1)
+    if(array.length <= 0)
+	alert(w.threads.length)
 }
