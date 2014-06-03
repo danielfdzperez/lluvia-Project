@@ -80,6 +80,7 @@ Zombie.prototype.die = function(){
     zombie_die.play()
     this.is_alive = false
     this.geo_data.position = new Vector(-10, 0)
+this.my_world.kill(this)
    /* this.config = { 
                  colour: "red",
                  geo_data:  {

@@ -48,17 +48,17 @@ Processor.prototype.register = function(cObject, solicitorF){
 }
 
 /**
- * Removes a thread out of the execution queue.
- *
- * @memberOf 	{Processor}
- * @method 		 kill
- * @param 		{Thread} 		rObject 	Object to be removed from the execution queue.
- * @param 		{Function}  	solicitorF  As far as an object can be processed by several parallel solicitors function, one can be removed. (This is a fairly overenthusiastic feature indeed)
- */
+* Removes a thread out of the execution queue.
+*
+* @memberOf {Processor}
+* @method kill
+* @param {Thread} rObject Object to be removed from the execution queue.
+* @param {Function} solicitorF As far as an object can be processed by several parallel solicitors function, one can be removed. (This is a fairly overenthusiastic feature indeed)
+*/
 Processor.prototype.kill = function(rObject, solicitorF){
-	for (var i in this.threads)
-		if (this.threads[i] == {object: rObject, solicitor: solicitorF})
-			this.threads.slice(i,i+1);
+  for (var i in this.threads)
+    if (this.threads[i] == {object: rObject, solicitor: solicitorF})
+     this.threads.slice(i,i+1);
 }
 
 /**
