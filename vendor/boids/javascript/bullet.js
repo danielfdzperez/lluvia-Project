@@ -86,11 +86,11 @@ Bullet.actions = function(bullets, zombies, w){
     } //end for
 } //end function
 
-Bullet.prototype.die = function (array, pos, w){
-    for(var i in w.threads){
-        if(w.threads[i].object == this){
-            w.threads.splice(i, 1)
-         }
-    }
-    array.splice(pos, 1)
-}
+//Bullet.prototype.die = function (array, pos, w){
+//    for(var i in w.threads){
+//        if(w.threads[i].object == this){
+//            w.threads.splice(i, 1)
+//         }
+//    }
+//    array.splice(pos, 1)
+//}

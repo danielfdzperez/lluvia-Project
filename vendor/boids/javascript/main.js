@@ -5,7 +5,7 @@ var zombies = []                  //The aray containing the zombies
 var gun_shots = []
 var keys_down = {} 
 var keys_up = {}
-var level = 1
+var level = 0
 var cont = 0
 var info = null
 function main(){
@@ -32,21 +32,21 @@ function run(){
 } 
  
 function actions(){
-   
-   if(zombies.length < level * 5 )
-      Zombie.create_new(w, zombies, usr)
    usr.actions(keys_down, keys_up, w, gun_shots) 
    Bullet.actions(gun_shots, zombies, w)
    Zombie.actions(zombies, usr, w)
 }
 function level_info(){
-
-   var end_level = 0
-   for(var i = 0; i < zombies.length; i++)
-      if(!zombies[i].is_alive)
-	  end_level ++
-   if(end_level == zombies.length)
-       level = ++ 
+   if(zombies.length <= 0){
+       level  ++ 
+       for(var i=0; i<level*5; i++)
+          Zombie.create_new(w, zombies, usr, level)
+       //alert(zombies.length)
+   }
+   if(usr.live <= 0){
+       level = 0
+       usr.live = 100
+   }
 
    info.innerHTML = "Live: " + usr.live + "<br>" + "Level: " + level
 }

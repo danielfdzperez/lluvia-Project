@@ -18,9 +18,6 @@ function GameElements(image, direction, img_width, img_height, number_sprites, r
 }
 
 GameElements.prototype.draw = function(ctx){
-    var paint = this.is_alive || this.is_moving
-    if(!paint)
-	return
     var p = this.geo_data.position;
     var v = this.geo_data.velocity;
     var a = this.geo_data.acceleration;
@@ -127,6 +124,19 @@ GameElements.prototype.configuration = function(){
                                acceleration: new Vector(this.acc.x, this.acc.y)
                             }
    }
+}
+/*
+ *Esta función recorre el array del mundo (threads) y busca el objeto que debe matar.
+ *El array es (El array del main donde están los boids tambien).
+ *La pos es la posición del objeto en el array.
+ */
+GameElements.prototype.die = function (array, pos, world){
+    for(var i in world.threads){
+        if(world.threads[i].object == this){
+            world.threads.splice(i, 1)
+         }
+    }
+    array.splice(pos, 1)
 }
 /*GameElements.prototype.sound = function(){
     
