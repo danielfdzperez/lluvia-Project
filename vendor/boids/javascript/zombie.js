@@ -3,16 +3,22 @@ Zombie.prototype.constructor = Zombie
 
 var canvas = document.getElementById('screener') 
 var TDirection = {north: 0, northeast: 45, east: 90, southeast: 135, south: 180, southwest: 225, west: 270, northwest: 315}
-var attack_sound = new Audio()
-var zombie_die = new Audio()
-zombie_die.src = "sounds/zombie_die.mp3"
-attack_sound.src = "sounds/bite.mp3" 
+/*Zombie sounds*/
+Zombie.attack_sound     = new Audio()
+Zombie.zombie_die       = new Audio()
+Zombie.sound            = new Audio()
+Zombie.sound.src        = "sounds/zombie.mp3"
+Zombie.zombie_die.src   = "sounds/zombie_die.mp3"
+Zombie.attack_sound.src = "sounds/bite.mp3" 
+
+Zombie.img              = new Image()
+Zombie.img.src          = "images/sprite-bueno.png" 
 
 function Zombie(positions){
   this.surprise = (Math.floor(Math.random() * 10) == 5)
   this.damage;
   var spawn_position = new Coordinate(positions[0], positions[1])
-  GameElements.call(this, "images/sprite-bueno.png", TDirection.north, 48, 48, 7, 49.125, "sounds/zombie.mp3", 
+  GameElements.call(this, TDirection.north, 48, 48, 7, 49.125, 
 	            spawn_position.x, spawn_position.y)
   Boid.call(this, this.configuration())
 }
@@ -70,12 +76,13 @@ Zombie.actions = function(zombies, hunter){
       if(hunter_pos.y <= zombie_pos.y+24 && hunter_pos.y >= zombie_pos.y-24 && hunter_pos.x <= zombie_pos.x+24 && 
          hunter_pos.x >= zombie_pos.x-24){
 	 hunter.live -= zombies[i].damage
-         attack_sound.play()	
+	 Zombie.sound.play()
+         Zombie.attack_sound.play()	
       }
    }
 }
 
 Zombie.prototype.die = function(array, pos, w){
-    zombie_die.play()
+    Zombie.zombie_die.play()
     GameElements.prototype.die.apply(this, arguments)
 }

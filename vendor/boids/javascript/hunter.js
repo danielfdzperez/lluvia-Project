@@ -3,8 +3,12 @@ Hunter.prototype.constructor = Hunter
 
 var canvas = document.getElementById('screener') 
 var TDirection = {north: 0, northeast: 45, east: 90, southeast: 135, south: 180, southwest: 225, west: 270, northwest: 315}
+
+Hunter.img = new Image()
+Hunter.img.src = "images/sprite-jugador.png"
+
 function Hunter(){
-  GameElements.call(this, "images/sprite-jugador.png", TDirection.north, 21, 43, 3, 21, null, 300, 120)
+  GameElements.call(this, TDirection.north, 21, 43, 3, 21, 300, 120)
   Boid.call(this, this.configuration())
 }
 
@@ -12,6 +16,7 @@ Hunter.prototype.actions = function(keys_down, keys_up, w, gun_shots){
    var acc        = new Coordinate(this.geo_data.velocity.get_coord(1), this.geo_data.velocity.get_coord(0))
    var actual_pos = new Coordinate(this.geo_data.position.get_coord(1), this.geo_data.position.get_coord(0))
 
+   /*Space fails if arrows up and left are down*/
    /*If keys up*/
    if (87 in keys_up || 38 in keys_up)  // Player holding up
        acc.y = 0 
@@ -31,6 +36,7 @@ Hunter.prototype.actions = function(keys_down, keys_up, w, gun_shots){
    if (68 in keys_down || 39 in keys_down)  // Player holding right
        acc.x = 20 
    if (32 in keys_down){
+
       gun_shots.push(w.new_boid_of(Bullet, usr))
       }
    if(16 in keys_down){ //player run

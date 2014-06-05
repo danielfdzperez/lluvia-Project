@@ -40,19 +40,22 @@ function actions(){
 }
 
 function level_info(){
-   if(zombies.length <= && number_zombies == level * 5)
+   if(zombies.length <= 0 && number_zombies >= level * 5){
        level  ++ 
+       number_zombies = 0
+   }
    else
-       if(number_zombies < level * 5)
+       if(number_zombies < level * 5 && Math.floor(Math.random() * 10) == 5){ //Create the zombies.
           Zombie.create_new(w, zombies, usr, level)
-       //alert(zombies.length)
+	  number_zombies ++
+       }
    if(usr.live <= 0){
        level = 0
        usr.live = 100
        for(var i=zombies.length-1; i>-1; i--)
 	   zombies[i].die(zombies, i, w)
    }
-   info.innerHTML = "Live: " + usr.live + "<br>" + "Level: " + level
+   info.innerHTML = "Live: " + usr.live.toFixed(0) + "<br>" + "Level: " + level
 }
 
 addEventListener("keydown", function (e) {
