@@ -31,30 +31,7 @@ Hunter.prototype.actions = function(keys_down, keys_up, w, gun_shots){
    if (68 in keys_down || 39 in keys_down)  // Player holding right
        acc.x = 20 
    if (32 in keys_down){
-     /* if(gun_shots.length < 5)
-         gun_shots.push(w.new_boid_of(Bullet, usr))
-      for(var i=0; i<gun_shots.length; i++)
-	  if(!gun_shots[i].is_moving)
-	      gun_shots[i].is_moving = true*/
       gun_shots.push(w.new_boid_of(Bullet, usr))
-	      
-     //Zombie.create_new(w, zombies, usr) //This create 3 new zombies
-          //zombies.splice(cuenta, 1)
-          //alert(zombies[0].constructor.name)
-          //delete(zombies[0])
-          // Zombie.create_new(w, zombies, usr) //This create 3 new zombies
-          /*----------Dead Zombie Test---------------------
-          /  //alert(zombies.length)
-          /  //alert(w.get_boids()[0])
-          /  //for(var h in usr)
-          /    //  delete usr[h]
-          /  //alert(j)
-          /   //alert(usr.geo_data.accition.get_coord(0))
-          /
-          /  //zombies.splice(0,1)  
-          /  //Zombie.crete_new(w, zombies, usr)
-          /  //alert(zombies.length)
-          /-----------------------------------------------*/
       }
    if(16 in keys_down){ //player run
        acc.x *= 2

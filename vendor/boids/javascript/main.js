@@ -8,6 +8,8 @@ var keys_up = {}
 var level = 0
 var cont = 0
 var info = null
+var number_zombies = 0
+
 function main(){
    w = new World()
    var boid_list = new WorldInterface("boid_list_content")
@@ -36,18 +38,20 @@ function actions(){
    Bullet.actions(gun_shots, zombies, w)
    Zombie.actions(zombies, usr, w)
 }
+
 function level_info(){
-   if(zombies.length <= 0){
+   if(zombies.length <= && number_zombies == level * 5)
        level  ++ 
-       for(var i=0; i<level*5; i++)
+   else
+       if(number_zombies < level * 5)
           Zombie.create_new(w, zombies, usr, level)
        //alert(zombies.length)
-   }
    if(usr.live <= 0){
        level = 0
        usr.live = 100
+       for(var i=zombies.length-1; i>-1; i--)
+	   zombies[i].die(zombies, i, w)
    }
-
    info.innerHTML = "Live: " + usr.live + "<br>" + "Level: " + level
 }
 

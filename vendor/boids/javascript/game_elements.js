@@ -125,6 +125,7 @@ GameElements.prototype.configuration = function(){
                             }
    }
 }
+
 /*
  *Esta función recorre el array del mundo (threads) y busca el objeto que debe matar.
  *El array es (El array del main donde están los boids tambien).
@@ -138,6 +139,7 @@ GameElements.prototype.die = function (array, pos, world){
     }
     array.splice(pos, 1)
 }
+
 /*GameElements.prototype.sound = function(){
     
 }*/
