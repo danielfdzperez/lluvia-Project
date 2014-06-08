@@ -28,9 +28,9 @@ function main(){
 }
 
 function run(){
-       setTimeout(run, 20)
-       actions()
-       level_info()
+   setTimeout(run, 20)
+   actions()
+   level_info()
 } 
  
 function actions(){
@@ -45,7 +45,7 @@ function level_info(){
        number_zombies = 0
    }
    else
-       if(number_zombies < level * 5 && Math.floor(Math.random() * 10) == 5){ //Create the zombies.
+       if(number_zombies < level * 5 && Math.floor(Math.random() * 10) == 5 && Math.floor(Math.random() * 10) == 7){ //Create the zombies.
           Zombie.create_new(w, zombies, usr, level)
 	  number_zombies ++
        }
